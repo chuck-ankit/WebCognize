@@ -5,24 +5,38 @@ import Results from '../components/Results';
 
 const Home = () => {
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSearch = async (query) => {
-    const response = await fetch(`http://localhost:5000/search`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ query }),
-    });
-    const data = await response.json();
-    setResults(data.results);
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch(`http://localhost:5000/search`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query }),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setResults(data.results);
+    } catch (err) {
+      setError('An error occurred while fetching results. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-chetwode-blue-100">
       <Header />
-      <SearchBar onSearch={handleSearch} />
-      <Results results={results} />
+      <SearchBar onSearch={handleSearch} loading={loading} />
+      {error && <p className="text-red-500 text-center">{error}</p>}
+      <Results results={results} loading={loading} />
     </div>
   );
 };

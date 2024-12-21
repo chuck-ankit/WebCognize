@@ -16,7 +16,7 @@ yarn-error.log*
 .cache/
 dist/
 build/
-
+logs/
 # IDE and OS files
 .DS_Store
 Thumbs.db

@@ -59,7 +59,7 @@ Before you get started, make sure you have the following installed:
 Clone the WebCognize repo to your local machine:
 
 ```bash
-git clone https://github.com/your-username/WebCognize.git
+git clone https://github.com/chuck-ankit/WebCognize.git
 cd WebCognize
 ```
 

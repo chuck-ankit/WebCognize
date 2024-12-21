@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const logger = require('../config/logger'); // Import logger
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -21,7 +22,8 @@ router.post('/', async (req, res) => {
     );
     res.json({ results: response.data.choices });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    logger.error(`Error in /search route: ${error.message}`);
+    res.status(500).json({ error: 'An error occurred while fetching results. Please try again.' });
   }
 });
 
