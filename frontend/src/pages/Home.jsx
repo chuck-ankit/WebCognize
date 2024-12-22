@@ -1,10 +1,11 @@
+// Home.js
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import Results from '../components/Results';
 
 const Home = () => {
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState(null); // Default to null to avoid showing a message initially
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
